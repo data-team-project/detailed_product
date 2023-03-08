@@ -53,100 +53,7 @@
         }
     </script>
     <!--style-->
-    <style>
-        body {
-            margin: 0;
-        }
-        .header {
-            background-image: url('https://images.unsplash.com/photo-1478827536114-da961b7f86d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
-            background-repeat: no-repeat;
-            background-size: cover;
-            font-size: 3em;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-            position: relative;
-            z-index: 2;
-        }
-        input[type="button"] {
-            /* add a lower z-index to the input tag to make it appear in front of the h1 tag */
-            z-index: 1;
-            font-size: 100%;
-        }
-        .main_grid {
-            display: grid;
-            grid-template-columns: 1fr 4fr;
-            margin: 10px;
-        }
-        .top_grid {
-            display: grid;
-            grid-template-rows: 3fr 1fr;
-        }
-        @media only screen and (max-width: 600px) {
-            .header {
-                font-size: 2em;
-                padding: 10px;
-            }
-        }
-        h1 a {
-            color: aliceblue;
-            font-size: 200%;
-        }
-        .detailed_product_description {
-            margin-left: 20px;
-            font: 0.75em Nanum Gothic,"나눔고딕",'Noto Sans KR',Dotum,AppleGothic,Verdana,'FontAwesome',sans-serif ;
-        }
-        .detailed_product_description_under1 {
-            display: grid;
-            grid-template-columns: 1fr 3fr;
-            font-size: 150%;
-            border-bottom: 1px solid black;
-        }
-        .detailed_product_description_under2 {
-            margin-top: 20px;
-            padding-bottom: 20px;
-            padding-top: 20px;
-            display: grid;
-            grid-template-columns: 3fr 1fr;
-            font-size: 150%;
-            border-bottom: 2px solid black;
-            border-top: 2px solid black;
-        }
-        .detailed_product_description_under1_select {
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: left;
-        }
-        
-        .SNS_image {
-            width: 15px;
-            height: 15px;
-            padding-left: 5px;
-            padding-right: 5px;     
-        }
-        .price {
-            color: dodgerblue;
-        }
-        .minor_text{
-            color: grey;
-            font-size: 80%;
-            display: flex;
-            align-items: center;
-            justify-content: left;
-        }
-        .review_title {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: cornflowerblue;
-        }
-        h2 {
-            font-size: 300%;
-            border-bottom: 1px solid black;
-            padding-bottom: 15px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -162,7 +69,8 @@
                 <img src="https://images.unsplash.com/photo-1628087235616-4e146afcd061?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80"/>
             </div>
             <div class="detailed_product_description">
-                <input type="button" title="Night Mode" onclick="nightDayHandler(this)" /><br/>
+                <!--nightDayHandler Button-->
+                <!-- <input type="button" title="Night Mode" onclick="nightDayHandler(this)" /><br/> -->
                 <h2 id="productName">2인용 텐트 세트 A [10% 할인 중]</h2>
                 <!--상품명, 2박3일 대여요금, SNS 상품홍보-->
                 <div class="detailed_product_description_under1">
@@ -190,7 +98,8 @@
                             <option value="option2" disabled>-------------------------</option>
                             <option value="option3">비박텐트, 미니타프, 경량릴렉스체어 2개, 경량테이블, 자충매트 2개, 2인용 코펠, 버너</option>
                         </select>
-                        <div class="choosenOption"></div>
+                        <!--옵션 선택시 팝업기능-->
+                        <!-- <div class="choosenOption"></div>
                         <script>
                             const selectOptions = document.getElementById('mySelect1');
                             const choosenOption = document.querySelector('.choosenOption');
@@ -198,17 +107,34 @@
                             selectOptions.addEventListener('change', (event) => {
                             choosenOption.innerText = event.target.value;
                             });
-                        </script>
+                        </script> -->
 
                     </div>
                 </div>
                 <!--대여기간-->
                 <div class="detailed_product_description_under1">
-                    <div>
-                        <p>대여기간</p>
-                    </div>
+                    <div><p>대여기간</p></div>
+                    <!--대여기간 select-->
                     <div class="detailed_product_description_under1_select">
-                        <select>
+                        <select id="select" onchange="
+                            const selectedValue = myOption();
+                            if(selectedValue == 'option3'){
+                                console.log('정상작동 했습니다. option3')
+                                priceLoad(selectedValue);
+                            }
+                            else if(selectedValue == 'option4'){
+                                console.log('정상작동 했습니다. option4');
+                                priceLoad(selectedValue);
+                            }
+                            else if(selectedValue == 'option5'){
+                                console.log('정상작동 했습니다. option5');
+                                priceLoad(selectedValue);
+                            }
+                            else if(selectedValue == 'option6'){
+                                console.log('정상작동 했습니다. option6');
+                                priceLoad(selectedValue);
+                            }
+                        ">
                             <option value="option1">- [필수] 대여기간 선택</option>
                             <option value="option2" disabled>-------------------------</option>
                             <option value="option3">2박3일</option>
@@ -224,74 +150,129 @@
                         <p>사용 시작일</p>
                     </div>
                     <div class="detailed_product_description_under1_select">
-                        <input type="datetime-local"/>
+                        <input type="date"/>
                     </div>
                 </div>
                 <!--최소 주문 수량-->
                 <div class="minor_text">
                     <scan>(최소 주문 수량은 1개입니다)</scan>
                 </div>
-                <!--총 상품금액(수량)-->
+                <!--선택 상품, 선택 옵션 가격-->
                 <div class="detailed_product_description_under2">
                     <div>
+                        <h3>현재 선택 상품 :</h3>
                         <!--현재 선택 상품-->
-                        <div>
+                        <div  class="choosenProduct">
                             <script>
                                 const productName = document.getElementById("productName").textContent;
-                                const description = document.querySelector(".detailed_product_description_under2");
+                                const description = document.querySelector(".choosenProduct");
                                 description.innerHTML = productName;
                             </script>
                         </div>
+                        <h3>▼현재 선택 옵션 가격▼</h3>
                         <!--선택 옵션에 따른 가격-->
                         <div id="result">
-                            
+                            0원
                         </div>
                     </div>
                 </div>
+                <!--최종 가격-->
+                <div class="detailed_product_description_under2">
+                    <div id="finalPrice">
+                        <h3>▼최종 가격▼</h3>
+                        <div id="result2">
+                           0원
+                        </div>
+                    </div>
+                </div>
+                <!--제품 리뷰 댓글, 라이브 채팅-->
+                <div>
+                    <h2 class="review_title">제품 리뷰</h2>
+                    <!--comment fnc-->
+                    <p>
+                        <div id="disqus_thread"></div>
+                        <script>
+                            /**
+                            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                            /*
+                            var disqus_config = function () {
+                            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                            };
+                            */
+                            (function() { // DON'T EDIT BELOW THIS LINE
+                            var d = document, s = d.createElement('script');
+                            s.src = 'https://been-world.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                            })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    </p>
+                    <!--Live chatting fnc-->
+                    <p>
+                        <!--Start of Tawk.to Script-->
+                        <script type="text/javascript">
+                            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+                            (function(){
+                            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+                            s1.async=true;
+                            s1.src='https://embed.tawk.to/63fc114f4247f20fefe2cc3b/1gq8a77tp';
+                            s1.charset='UTF-8';
+                            s1.setAttribute('crossorigin','*');
+                            s0.parentNode.insertBefore(s1,s0);
+                            })();
+                            </script>
+                            <!--End of Tawk.to Script-->
+                    </p>
+                </div> 
             </div>
         </div>
-        <!--제품 리뷰 댓글, 라이브 채팅-->
-        <div>
-            <h2 class="review_title">제품 리뷰 댓글</h2>
-            <!--comment fnc-->
-            <p>
-                <div id="disqus_thread"></div>
-                <script>
-                    /**
-                    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-                    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-                    /*
-                    var disqus_config = function () {
-                    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-                    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-                    };
-                    */
-                    (function() { // DON'T EDIT BELOW THIS LINE
-                    var d = document, s = d.createElement('script');
-                    s.src = 'https://been-world.disqus.com/embed.js';
-                    s.setAttribute('data-timestamp', +new Date());
-                    (d.head || d.body).appendChild(s);
-                    })();
-                </script>
-                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-            </p>
-            <!--Live chatting fnc-->
-            <p>
-                <!--Start of Tawk.to Script-->
-                <script type="text/javascript">
-                    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-                    (function(){
-                    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-                    s1.async=true;
-                    s1.src='https://embed.tawk.to/63fc114f4247f20fefe2cc3b/1gq8a77tp';
-                    s1.charset='UTF-8';
-                    s1.setAttribute('crossorigin','*');
-                    s0.parentNode.insertBefore(s1,s0);
-                    })();
-                    </script>
-                    <!--End of Tawk.to Script-->
-            </p>
-        </div>  
     </div>
+    <!--함수 정의-->
+    <!--myOption()-->
+    <script>
+        function myOption(){
+            var selectedOption = document.getElementById("select")
+            selectedOption = selectedOption.options[selectedOption.selectedIndex].value;
+            return selectedOption;
+        }
+    </script>
+    <!--priceLoad 함수-->
+    <script>
+        function priceLoad(name) {
+            fetch(name).then(function(response) {
+                response.text().then(function(text) {
+                    document.querySelector("#result").innerHTML = text;
+                });
+            });
+        }
+    </script>
+    <!--priceLoad2 함수 (#result2)-->
+    <script>
+        function priceLoad2(name) {
+            fetch(name).then(function(response) {
+                response.text().then(function(text) {
+                    document.querySelector("#result2").innerHTML = text;
+                });
+            });
+        }
+    </script>
+    <!--id=result 값 변화 감지 함수-->
+    <script>
+        // Get a reference to the result div
+        var resultDiv = document.getElementById("result");
+    
+        // Create a MutationObserver to detect changes to the div contents
+        var observer = new MutationObserver(function() {
+            // Call the priceLoad2 function when the contents of the div change
+            const selectedValue = myOption();
+            priceLoad2(selectedValue);
+        });
+    
+        // Start observing the div for changes
+        observer.observe(resultDiv, { childList: true });
+    </script>
 </body>
 </html>
